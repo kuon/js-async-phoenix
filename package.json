@@ -1,5 +1,5 @@
 {
-  "name": "js-async-phoenix",
+  "name": "async-phoenix",
   "version": "1.0.0",
   "description": "A small utility library to use phoenix channels with promise",
   "main": "index.js",
