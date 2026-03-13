@@ -1,25 +1,24 @@
 ## Phoenix async
 
-This is a small library that help use phoenix in an async js environment.
+NOTE: This is a very small library you might prefer to include in your project
+directly and tune it to your liking. It is intentionally minimal.
 
-Promise push example (live view hook):
+This is a small library that help use phoenix channels and socket with promise.
+
+Channel example:
 
 ```js
 
-import { promise_push } from "async_phoenix"
+import { Socket, Channel } from "async_phoenix"
 
-const myhook = {
-    async mounted() {
-        this.push = promise_push(this)
-        this.el.addEventListener("click", this.handler.bind(this))
-    }
-    async handler() {
-        // this is equivalent to 
-        // this.pushEvent("some_phoenix_event", {params}, () => console.log("after event"))
+let s = new Socket("/mysocket");
+await s.connect();
 
-        let response = await this.push("some_phoenix_event", {params})
-        console.log("after event")
-    }
-}
+let c = s.channel("mychannel", { params..});
+
+await c.join();
+let response = await c.push("myevent", { data });
+await c.leave();
+await s.disconnect();
 
 ```
